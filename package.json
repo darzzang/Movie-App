@@ -16,7 +16,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.config.dev --open",
-    "build": "webpack --config ./config/webpack.config.prod"
+    "build": "webpack --config ./config/webpack.config.prod",
+    "deploy": "npm run build &&gh-pages -d build"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +37,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
     "file-loader": "^4.2.0",
+    "gh-pages": "^3.2.3",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
@@ -48,5 +50,6 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
-  }
+  },
+  "homepage": "https://github.com/darzzang/Movie-App.git"
 }

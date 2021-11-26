@@ -1,13 +1,14 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { Input, Button } from "components"
+import { Input, Button, Modal } from "components"
 import './Register.css'
 
 
 const Register = () => {
     const [id, setId] = useState('')
     const [password, setPassword] = useState('')
+    const [open, setOpen] = useState(false)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -27,10 +28,17 @@ const Register = () => {
                 navigate('/home')   
                 // 아무것도 입력하지 않고 버튼을 클릭하면 경고메세지 출력
             } else{
-                alert('사용자 정보를 입력하세요')
+                // alert('사용자 정보를 입력하세요')
+                openModal()
             }
-            
         }
+    }
+
+    const openModal = () => {
+        setOpen(true)
+    }
+    const closeModal = () => {
+        setOpen(false)
     }
 
     return (
@@ -40,6 +48,17 @@ const Register = () => {
             <Input name='password' type='password' placeholder='Type PASSWORD ... ' value={password}
                 onChange={handleChange}/>
             <Button handleClick={handleRegister}>Register</Button>
+
+            {/* 모달창 */}
+            <Modal open={open}>
+                <div className="header">-- Warning message --</div>
+                <div className="body">
+                    올바른 정보를 입력하세요 !
+                </div>
+                <div className="footer">
+                    <Button size="small" handleClick={closeModal}>닫기</Button>
+                </div>
+            </Modal>
         </div>
     )
 }

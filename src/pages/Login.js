@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 
-import { Input, Button } from "components"
+import { Input, Button, Modal } from "components"
 import './Login.css'
 
 const Login = () => {
     const [id, setId] = useState('')
     const [password, setPassword] = useState('')
+    const [open, setOpen] = useState(false)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -29,8 +30,16 @@ const Login = () => {
             navigate('/home')
             // 사용자 정보 입력 없거나 등록된 사용자 정보와 다른데 버튼을 클릭하면 경고창 출력
         } else {
-            alert('아이디나 비밀번호가 틀렸습니다')
+            // alert('아이디나 비밀번호가 틀렸습니다')
+            openModal()
         }
+    }
+
+    const openModal = () => {
+        setOpen(true)
+    }
+    const closeModal = () => {
+        setOpen(false)
     }
 
     return (
@@ -40,6 +49,17 @@ const Login = () => {
             <Input name='password' type='password' placeholder='Type PASSWORD ... ' value={password}
                 onChange={handleChange}/>
             <Button handleClick={handleLogin}>Login</Button>
+
+            {/* 모달창 */}
+            <Modal open={open}>
+                <div className="header">-- Warning message --</div>
+                <div className="body">
+                    올바른 정보를 입력하세요 !
+                </div>
+                <div className="footer">
+                    <Button size="small" handleClick={closeModal}>Close</Button>
+                </div>
+            </Modal>
         </div>
     )
 }
